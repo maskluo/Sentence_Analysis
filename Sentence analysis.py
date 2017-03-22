@@ -4,43 +4,43 @@ FileInSentence = []
 PhrasesInSentence = []
 StatisticsOfPhrases = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-#Ö¸¶¨Â·¾¶
+#æŒ‡å®šè·¯å¾„
 TXTFile = open('..\Data\Test2.txt','r')
 ResultFile = open('..\Data\Result.txt','w')
 
-#¶ÁÈ¡ÎÄ¼ş
+#è¯»å–æ–‡ä»¶
 TXT = unicode(TXTFile.read(), 'gbk')
 TXTFile.close()
 
-#Ìæ»»
-temp = TXT.replace(':', '|')#Ã²ËÆÕâ¸öÃ»ÓÃ
+#æ›¿æ¢
+temp = TXT.replace(':', '|')#è²Œä¼¼è¿™ä¸ªæ²¡ç”¨
 temp = TXT.replace('!', '|')
 temp = TXT.replace('?', '|')
-temp = TXT.replace(unicode('£º', 'gbk'), '|')
-temp = TXT.replace(unicode('¡¡', 'gbk'), '')
-temp = TXT.replace(unicode('£¡', 'gbk'), '|')
-temp = TXT.replace(unicode('£¿', 'gbk'), '|')
-temp = TXT.replace(unicode('¡£', 'gbk'), '|')
-#temp = TXT.replace(unicode('£»', 'gbk'), unicode('£¬', 'gbk'))#Ã²ËÆ¼ÓÁËÕâÁ½¸ö»á±¨´í£¬ÄªÃû
-#temp = TXT.replace(unicode(';', 'gbk'), unicode('£¬', 'gbk'))
+temp = TXT.replace(unicode('ï¼š', 'gbk'), '|')
+temp = TXT.replace(unicode('ã€€', 'gbk'), '')
+temp = TXT.replace(unicode('ï¼', 'gbk'), '|')
+temp = TXT.replace(unicode('ï¼Ÿ', 'gbk'), '|')
+temp = TXT.replace(unicode('ã€‚', 'gbk'), '|')
+#temp = TXT.replace(unicode('ï¼›', 'gbk'), unicode('ï¼Œ', 'gbk'))#è²Œä¼¼åŠ äº†è¿™ä¸¤ä¸ªä¼šæŠ¥é”™ï¼Œè«å
+#temp = TXT.replace(unicode(';', 'gbk'), unicode('ï¼Œ', 'gbk'))
 
-#·Ö¾ä×Ó
+#åˆ†å¥å­
 FileInSentence = temp.split('|')
 
-#Õë¶Ô¾ä×Ó´¦Àí£¬ÕÒ³öÃ¿¸ö¾ä×Ó¸÷ÓĞ¶àÉÙ¸ö¾ä¶Á¶Î
+#é’ˆå¯¹å¥å­å¤„ç†ï¼Œæ‰¾å‡ºæ¯ä¸ªå¥å­å„æœ‰å¤šå°‘ä¸ªå¥è¯»æ®µ
 i = 0
 while i < len(FileInSentence):
-    temp = FileInSentence[i].split(unicode('£¬', 'gbk'))
+    temp = FileInSentence[i].split(unicode('ï¼Œ', 'gbk'))
     PhrasesInSentence.append(len(temp))
     i += 1
 
-#Í³¼Æ¸÷¾ä¶Á¶Î³¤¶ÈÒ»¹²³öÏÖÁË¶àÉÙ´Î
+#ç»Ÿè®¡å„å¥è¯»æ®µé•¿åº¦ä¸€å…±å‡ºç°äº†å¤šå°‘æ¬¡
 for element in PhrasesInSentence:
     StatisticsOfPhrases[element] += 1
 StatisticsOfPhrases[0] = len(PhrasesInSentence)
 print(StatisticsOfPhrases)
 
-#ÎÄ¼şÊä³ö
+#æ–‡ä»¶è¾“å‡º
 for num in StatisticsOfPhrases:
     ResultFile.write(str(num) + '\n')
 ResultFile.close()
