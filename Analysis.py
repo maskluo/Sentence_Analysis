@@ -42,4 +42,3 @@ def analysis(source_file):
     print(StatisticsOfPhrases)
 
     return StatisticsOfPhrases
-
