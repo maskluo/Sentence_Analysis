@@ -1,13 +1,14 @@
 #coding=gbk
 
-FileInSentence = []
-PhrasesInSentence = []
-StatisticsOfPhrases = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 
 
 def analysis(source_file):
+    FileInSentence = []
+    PhrasesInSentence = []
+    StatisticsOfPhrases = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     #指定路径
-    #TXTFile = open('..\Data\Test'+'4'+'.txt','r')
+    #TXTFile = open('..\Data\Test'+'7'+'.txt','r')
     TXTFile = open(source_file, 'r')
     #读取文件
     TXT = unicode(TXTFile.read(), 'gbk')
