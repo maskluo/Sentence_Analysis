@@ -3,14 +3,14 @@
 import Analysis
 import csv
 
-FileNumber = 1
+FileNumber = 9
 csvfile = file('..\Result\Result.csv', 'wb')
 writer = csv.writer(csvfile)
 
 i = 1
 while i <= FileNumber:
     #处理
-    result = Analysis.analysis(FileNumber)
+    result = Analysis.analysis(i)
 
     #输出到CSV
     writer.writerow(result)

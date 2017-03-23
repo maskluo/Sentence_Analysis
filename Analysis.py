@@ -2,15 +2,14 @@
 import math
 import csv
 
+
 def analysis(number):
     #变量初始化
     CorpusInSentence = []
     PhrasesInSentence = []
     SentenceConclusion = []
+    Result = []
     PhraseCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    #单句统计的输出路径
-    csvfile = file('..\Result\SentenceInTXT'+str(number)+'.csv', 'wb')
-    writer = csv.writer(csvfile)
 
     #指定文件
     source = '..\Data\Test'+str(number)+'.txt'
@@ -41,13 +40,14 @@ def analysis(number):
     #存储各句子，各列分别为该句子句读段数量，该句总长度，句读段平均长度，句读段标准差
     SentenceSituation = [0 for col in range(4)]
     #存储文章中读段数量，该类型句读段的句子总长度的平均值，最大值，最小值，句读段平均长度的平均值，最大值，最小值，句读段标准差的平均值，最大值
-    ConclusionOfTxt = [[0 for col in range(4)] for row in range(30)]
+    ConclusionOfTxt = [[0 for col in range(10)] for row in range(30)]
 
-    print(Corpus)
     #针对句子处理，找出每个句子各有多少个句读段
+    #单句统计的输出路径
+    csvfile = file('..\Result\SentenceInTXT'+str(number)+'.csv', 'wb')
+    writer = csv.writer(csvfile)
     i = 0
-#    while i < len(CorpusInSentence):
-    while i < 5:
+    while i < len(CorpusInSentence):
         SentenceSituation = [0, 0, 0, 0]
         CorpusInPhrase = CorpusInSentence[i].split(unicode('，', 'gbk'))
         #PhrasesInSentence.append(len(CorpusInPhrase))
@@ -74,49 +74,54 @@ def analysis(number):
         i += 1
     csvfile.close()
 
-    # 存储各句子，各列分别为该句子句读段数量，该句总长度，句读段平均长度，句读段标准差
-    SentenceSituation = [0 for col in range(4)]
-    # 存储文章中句读段数量，以及该类型句读段的句子总长度的平均值，最大值，最小值，句读段平均长度的平均值，最大值，最小值，句读段标准差的平均值，最大值，最小值
-    ConclusionOfTxt = [[0 for col in range(10)] for row in range(30)]
-    #统计各句读段长度一共出现了多少次
-    SumSum = 0
-    SumMax = 0
-    SumMin = 10
-    MeanSum = 0
-    MeanMax = 0
-    MeanMin = 10
-    SDSum = 0
-    SDMax = 0
-    SDMin = 10
+    #赋初值
+    for element in ConclusionOfTxt:
+        element[1] = 0
+        element[2] = 0
+        element[3] = 10
+        element[4] = 0
+        element[5] = 0
+        element[6] = 10
+        element[7] = 0
+        element[8] = 0
+        element[9] = 10
+    #全篇分析
     for SentenceSituation in SentenceConclusion:
         ConclusionOfTxt[SentenceSituation[0]][0] += 1
-        '''
-        SumSum += SentenceSituation[1]
-        if SumMax < SentenceSituation[1]:
-            SumMax = SentenceSituation[1]
-        if SumMin > SentenceSituation[1]:
-            SumMin = SentenceSituation[1]
-        MeanSum += SentenceSituation[2]
-        if MeanMax < SentenceSituation[2]:
-            MeanMax = SentenceSituation[2]
-        if MeanMin > SentenceSituation[2]:
-            MeanMin = SentenceSituation[2]
-        SDSum += SentenceSituation[3]
-        if SDMax < SentenceSituation[3]:
-            SDMax = SentenceSituation[3]
-        if SDMin > SentenceSituation[3]:
-            SDMin = SentenceSituation[3]
-'''
-    print (SentenceConclusion)
-    print (ConclusionOfTxt)
+        ConclusionOfTxt[SentenceSituation[0]][1] += SentenceSituation[1]
+        if ConclusionOfTxt[SentenceSituation[0]][2] < SentenceSituation[1]:
+            ConclusionOfTxt[SentenceSituation[0]][2] = SentenceSituation[1]
+        if ConclusionOfTxt[SentenceSituation[0]][3] > SentenceSituation[1]:
+            ConclusionOfTxt[SentenceSituation[0]][3] = SentenceSituation[1]
+        ConclusionOfTxt[SentenceSituation[0]][4] += SentenceSituation[2]
+        if ConclusionOfTxt[SentenceSituation[0]][5] < SentenceSituation[2]:
+            ConclusionOfTxt[SentenceSituation[0]][5] = SentenceSituation[2]
+        if ConclusionOfTxt[SentenceSituation[0]][6] > SentenceSituation[2]:
+            ConclusionOfTxt[SentenceSituation[0]][6] = SentenceSituation[2]
+        ConclusionOfTxt[SentenceSituation[0]][7] += SentenceSituation[3]
+        if ConclusionOfTxt[SentenceSituation[0]][8] < SentenceSituation[3]:
+            ConclusionOfTxt[SentenceSituation[0]][8] = SentenceSituation[3]
+        if ConclusionOfTxt[SentenceSituation[0]][9] > SentenceSituation[3]:
+            ConclusionOfTxt[SentenceSituation[0]][9] = SentenceSituation[3]
 
+    Sum = 0
+    for element in ConclusionOfTxt:
+        if element[0] == 0:
+            element[3] = 0
+            element[6] = 0
+            element[9] = 0
+        else:
+            Sum += element[0]
+            element[1] = element[1] * 1.0 / element[0]
+            element[4] = element[4] * 1.0 / element[0]
+            element[7] = element[7] * 1.0 / element[0]
+    ConclusionOfTxt[0][0] = Sum
 
-
-
-
-    for element in PhrasesInSentence:
-        PhraseCount[element] += 1
-    PhraseCount[0] = len(PhrasesInSentence)
-    print(PhraseCount)
-
-    return PhraseCount
+    #文章结论的输出路径
+    csvfile = file('..\Result\Result' + str(number) + '.csv', 'wb')
+    writer = csv.writer(csvfile)
+    for element in ConclusionOfTxt:
+        writer.writerow(element)
+        Result.append(element[0])
+    print(Result)
+    return Result
