@@ -87,20 +87,30 @@ def analysis(number):
         element[9] = 10
     #全篇分析
     for SentenceSituation in SentenceConclusion:
+        #句读段总量
         ConclusionOfTxt[SentenceSituation[0]][0] += 1
+        #总字数
         ConclusionOfTxt[SentenceSituation[0]][1] += SentenceSituation[1]
+        #单句读段长度最大值
         if ConclusionOfTxt[SentenceSituation[0]][2] < SentenceSituation[1]:
             ConclusionOfTxt[SentenceSituation[0]][2] = SentenceSituation[1]
+        #单句读段长度最小值
         if ConclusionOfTxt[SentenceSituation[0]][3] > SentenceSituation[1]:
             ConclusionOfTxt[SentenceSituation[0]][3] = SentenceSituation[1]
+        #句读段平均长度总值
         ConclusionOfTxt[SentenceSituation[0]][4] += SentenceSituation[2]
+        #平均长度最大值
         if ConclusionOfTxt[SentenceSituation[0]][5] < SentenceSituation[2]:
             ConclusionOfTxt[SentenceSituation[0]][5] = SentenceSituation[2]
+        #平均长度最小值
         if ConclusionOfTxt[SentenceSituation[0]][6] > SentenceSituation[2]:
             ConclusionOfTxt[SentenceSituation[0]][6] = SentenceSituation[2]
+        #标准差平均值总值
         ConclusionOfTxt[SentenceSituation[0]][7] += SentenceSituation[3]
+        #标准差最大值
         if ConclusionOfTxt[SentenceSituation[0]][8] < SentenceSituation[3]:
             ConclusionOfTxt[SentenceSituation[0]][8] = SentenceSituation[3]
+        #标准差最小值
         if ConclusionOfTxt[SentenceSituation[0]][9] > SentenceSituation[3]:
             ConclusionOfTxt[SentenceSituation[0]][9] = SentenceSituation[3]
 
